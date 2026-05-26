@@ -1,0 +1,92 @@
+# Dependency directories
+node_modules/
+jspm_packages/
+web_packages/
+
+# Build outputs
+dist/
+build/
+out/
+bin/
+obj/
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Environments and Secrets (CRITICAL)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+*.env.*
+secrets.json
+credentials.json
+*.pem
+*.key
+*.pfx
+*.pkcs12
+id_rsa
+id_ed25519
+.idea/
+.vscode/sftp.json
+.vscode/settings.json
+!.vscode/settings.json.example
+
+# Local configuration files that may contain local pathing
+configs/vscode/settings.json.local
+configs/cursor/settings.json.local
+
+# Operating System Files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+*.lnk
+*.sys
+*.tmp
+*.bak
+*~
+
+# Logs and databases
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.log
+*.sqlite
+*.sqlite3
+*.db
+*.sql
+*.dump
+
+# Local caches
+.npm/
+.eslintcache
+.parcel-cache
+.cache/
+.next/
+.nuxt/
+.vuepress/dist
+.serverless/
+.fusebox/
+.dynamodb/
+.turbo/
+.gemini/antigravity-ide/
+.gemini/antigravity/
+
+# Temporary Backup Directories
+backup_configs/
+temp/
+tmp/
+
+# Obsidian local settings
+obsidian/.obsidian/workspace.json
+obsidian/.obsidian/workspace-mobile.json
+obsidian/.obsidian/appearance.json
+obsidian/.obsidian/community-plugins.json
+obsidian/.obsidian/plugins/
+obsidian/.obsidian/cache/

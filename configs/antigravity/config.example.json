@@ -1,0 +1,16 @@
+{
+  "userSettings": {
+    "browserJsExecutionPolicy": "BROWSER_JS_EXECUTION_POLICY_TURBO",
+    "globalPermissionGrants": {
+      "allow": [
+        "read_file(C:\\Users\\SEU_USUARIO\\Projects)",
+        "read_file(D:\\Obsidian)",
+        "read_file(C:\\Users\\SEU_USUARIO\\OneDrive\\Documentos\\00-Projetos)",
+        "write_file(D:\\Obsidian\\obsidian\\Índice Geral de Projetos.md)",
+        "write_file(D:\\Obsidian\\obsidian\\Mapa de Tecnologias.md)",
+        "write_file(D:\\Obsidian\\obsidian\\Pendências Gerais dos Projetos.md)",
+        "command($projects)"
+      ]
+    }
+  }
+}
