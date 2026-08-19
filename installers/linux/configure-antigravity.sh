@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -Eeuo pipefail
 
 # ==============================================================================
 # CONFIGURADOR DE INTELIGÊNCIA DO ANTIGRAVITY (Linux) - configure-antigravity.sh
@@ -14,6 +15,9 @@ echo -e "\e[33m🚀 Configurando contexto e prompts globais do Antigravity...\e[
 
 if [ -f "$PROMPT_SOURCE" ]; then
     mkdir -p "$ANTIGRAVITY_CONFIG_DIR"
+    if [[ -f "$ANTIGRAVITY_CONFIG_DIR/antigravity-global-prompt.md" ]] && ! cmp -s "$PROMPT_SOURCE" "$ANTIGRAVITY_CONFIG_DIR/antigravity-global-prompt.md"; then
+        cp -p "$ANTIGRAVITY_CONFIG_DIR/antigravity-global-prompt.md" "$ANTIGRAVITY_CONFIG_DIR/antigravity-global-prompt.md.bak.$(date -u +%Y%m%dT%H%M%SZ)"
+    fi
     cp "$PROMPT_SOURCE" "$ANTIGRAVITY_CONFIG_DIR/antigravity-global-prompt.md"
     echo -e "\e[32m✅ Prompt global de sistema injetado com sucesso no Antigravity!\e[0m"
 else

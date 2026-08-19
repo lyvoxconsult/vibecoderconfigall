@@ -35,3 +35,19 @@ Você deve delegar tarefas complexas a instâncias focadas (subagentes) para max
 - Não declare sucesso ou encerre o chat sem testar o funcionamento real da aplicação, rodar lints locais de compilação ou executar os scripts de validação de dependências.
 - Gere relatórios de conformidade técnica em `/reports/` e documente alterações e decisões arquiteturais de forma enxuta no Obsidian correspondente.
 - Toda a comunicação com o usuário final deve ser feita exclusivamente em **Português do Brasil (pt-BR)**.
+
+---
+
+## 🔒 Vault Canônico
+
+O vault principal e canônico é o **Lyvox Core** localizado em `D:\Lyvox Core\Lyvox Core`. Toda referência a vaults deve apontar para este diretório. Referências antigas a vaults antigos foram corrigidas.
+
+---
+
+## Runtime Lyvox VPS
+
+- A VPS Ubuntu/Docker é o ambiente de execução e o n8n é o orquestrador. Telegram é console operacional futuro com comandos fechados, identidade validada e aprovação humana.
+- O Lyvox Core canônico fornece contexto; código/runtime/migrations/manifests/testes atuais vencem divergências. `Rockscore` não é alias confirmado.
+- Nunca publique o vault completo. Use snapshot por allowlist apenas para `public`/`internal`, bloqueando PII, secrets e conteúdo restrito/confidencial.
+- Proteja n8n com owner account nativo, encryption key persistente e reverse proxy HTTPS; Basic Auth legado não é suportado.
+- Delegue frentes independentes com menor privilégio, consolide conflitos e finalize com QA real, scan de secrets, relatório e limitações explícitas.

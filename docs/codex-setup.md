@@ -28,7 +28,7 @@ Para provisionar o Codex em um novo computador:
    *Nota: O script copia o prompt global e as regras para o diretório de configurações operacionais do Codex local.*
 
 3. **Configure os Servidores MCP:**
-   Edite seu arquivo `codex-mcp-config.toml` preenchendo as chaves mascaradas de acordo com as instruções de [SECURITY_NOTES.md](file:///C:/Users/pedro/OneDrive/Documentos/00-Projetos/vibecoderconfigall/SECURITY_NOTES.md).
+   Edite seu arquivo `codex-mcp-config.toml` preenchendo as chaves mascaradas de acordo com as instruções de [SECURITY_NOTES.md](../SECURITY_NOTES.md).
 
 ---
 

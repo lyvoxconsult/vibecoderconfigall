@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -Eeuo pipefail
 
 # ==============================================================================
 # SCRIPT DE VALIDAÇÃO DE INTEGRIDADE DO REPOSITÓRIO (Bash) - validate-repo.sh
@@ -23,6 +24,36 @@ MANDATORY_FILES=(
     "CHANGELOG.md"
     ".gitignore"
     ".env.example"
+    "bootstrap.sh"
+    "docker/n8n/docker-compose.yml"
+    "docker/n8n/.env.example"
+    "installers/linux/install-docker.sh"
+    "installers/linux/install-n8n.sh"
+    "installers/linux/setup-directories.sh"
+    "installers/linux/setup-docs.sh"
+    "installers/linux/setup-firewall.sh"
+    "installers/linux/setup-skills.sh"
+    "scripts/validate-environment.sh"
+    "scripts/backup-n8n.sh"
+    "scripts/restore-n8n.sh"
+    "scripts/healthcheck.sh"
+    "scripts/print-status.sh"
+    "scripts/update-from-git.sh"
+    "scripts/update-skills.sh"
+    "scripts/sync-lyvox-core-sanitized.sh"
+    "skills/skills-manifest.json"
+    "skills/install-skills.sh"
+    "skills/sync-skills.sh"
+    "docs/lyvox-core-allowlist.txt"
+    "docs/lyvox-core-sync.md"
+    "docs/knowledge-governance.md"
+    "docs/n8n-agent-architecture.md"
+    "docs/vps-security-hardening.md"
+    "n8n/README.md"
+    "reports/IMPLEMENTATION_REPORT.md"
+    "reports/VALIDATION_REPORT.md"
+    "reports/SECURITY_SCAN_REPORT.md"
+    "reports/NEXT_STEPS.md"
     "configs/vscode/settings.json"
     "configs/antigravity/config.example.json"
     "mcp/mcp-config.example.json"

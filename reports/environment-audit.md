@@ -1,4 +1,6 @@
-# 📊 Relatório de Auditoria do Ambiente - vibecoderconfigall
+# Auditoria histórica do ambiente — não usar como evidência atual
+
+> Registro anterior preservado. Consulte os relatórios em caixa alta para o estado de 2026-07-12.
 
 > **Gerado em:** 2026-05-26
 > **Autor:** Agente Antigravity (automação)

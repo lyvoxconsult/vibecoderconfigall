@@ -22,6 +22,10 @@ obj/
 .env.production.local
 *.env
 *.env.*
+!/.env.example
+!/docker/n8n/.env.example
+!/n8n/.env.example
+!/templates/env/*.env.example
 secrets.json
 credentials.json
 *.pem
@@ -62,6 +66,16 @@ lerna-debug.log*
 *.db
 *.sql
 *.dump
+*.tar
+*.tar.gz
+*.tgz
+docker/n8n/data/
+docker/n8n/backups/
+n8n/data/
+n8n/backups/*.tar.gz
+docs/lyvox-core-sanitized/
+!docs/lyvox-core-sanitized/.gitkeep
+reports/runtime/
 
 # Local caches
 .npm/

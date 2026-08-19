@@ -1,0 +1,4 @@
+# Caminhos Markdown relativos ao Lyvox Core, um por linha.
+# Deny-by-default: mantenha vazio até revisão humana de cada nota.
+# Exemplo ilustrativo (não habilitado):
+# 00-HOME/Guia de Navegação.md

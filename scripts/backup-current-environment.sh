@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -Eeuo pipefail
 
 # ==============================================================================
 # SCRIPT DE RE-ESCANEAMENTO E BACKUP DO AMBIENTE ATUAL (Bash/Linux)

@@ -1,79 +1,53 @@
-# 🛡️ Notas de Segurança e Higienização (SECURITY_NOTES)
+# Notas de Segurança
 
-Este repositório foi construído seguindo a filosofia corporativa de **Zero Trust** e **Zero Leak**. Como este projeto se tornará um repositório Git, todo e qualquer dado secreto, chave de API ou credencial comercial deve ser rigorosamente impedido de ser persistido.
+Este repositório segue Zero Leak: configuração reutilizável pode ser versionada; credenciais, dados e artefatos operacionais reais não podem.
 
----
+## Proibido versionar ou sincronizar
 
-## 🚫 O que foi Sanitizado e Mascarado
+- `.env` real e variantes locais.
+- Tokens, senhas, cookies, JWTs, chaves SSH/TLS, connection strings e credenciais n8n.
+- SQLite/PostgreSQL, dumps, volumes Docker, backups e logs reais.
+- Dados pessoais, bancários, societários, jurídicos, financeiros, de clientes ou leads.
+- Conteúdo Lyvox Core `confidential`, `restricted` ou `secret`.
+- Workflows com dados de execução ou credenciais embutidas.
 
-Durante a varredura e preparação do ambiente, os seguintes dados foram identificados como altamente sensíveis e substituídos por placeholders no repositório:
+## n8n
 
-1. **Tokens de Modelos de Linguagem:**
-   - `OPENAI_API_KEY`, `GEMINI_API_KEY`, `ANTHROPIC_API_KEY`.
-   - Substituídos nos templates por: `insira_sua_chave_aqui` ou placeholders similares.
+- Defina `N8N_ENCRYPTION_KEY` forte antes da primeira inicialização e guarde-a junto ao backup, fora do Git.
+- A perda da chave impede descriptografar credenciais restauradas.
+- n8n atual usa user management obrigatório; `N8N_BASIC_AUTH_*` não é suportado desde 1.0.
+- O Compose liga `5678` em loopback. Para acesso remoto, use túnel SSH ou HTTPS com proxy reverso.
+- Não exponha Docker API, banco, Redis, Qdrant, Ollama ou serviços internos.
+- Restrinja retenção de execuções e revise logs para PII.
 
-2. **Acessos ao Cloud e Deploy:**
-   - `VERCEL_TOKEN`, `GITHUB_TOKEN`, `NETLIFY_AUTH_TOKEN`.
-   - Removidos completamente de todos os arquivos de configuração locais copiados.
+## VPS
 
-3. **Conexões de Banco de Dados:**
-   - Strings de conexão reais de PostgreSQL, MySQL e tokens de serviço Supabase (`SUPABASE_URL`, `SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`).
-   - Substituídos por estruturas limpas de exemplo.
+- Use usuário não-root com `sudo` e SSH por chave.
+- Desative senha/root somente após confirmar acesso alternativo.
+- Abra no UFW apenas SSH e, com proxy TLS, 80/443.
+- Grupo `docker` equivale a privilégio root; limite membros.
+- Atualize sistema, Docker e n8n com backup prévio e rollback definido.
 
-4. **Credenciais Locais e de Terminal:**
-   - Senhas criptografadas em perfis do terminal ou scripts privados do PowerShell.
-   - Qualquer variável de PATH que exponha pastas privadas não padronizadas.
+## Lyvox Core
 
----
+O Core original é somente leitura. Sync exige source explícito, dry-run e allowlist. Só Markdown aprovado com sensibilidade `public` ou `internal` pode ser candidato; frontmatter ausente ou inseguro bloqueia cópia. Nunca inclua `99-RESTRICTED-INDEX`, registries restritos, backups ou anexos.
 
-## 📁 Arquivos Bloqueados (.gitignore Ativo)
+`Rockscore` não aparece como alias confirmado no Core consultado. Não consolidar nomes automaticamente.
 
-O arquivo `.gitignore` global do repositório foi configurado de forma a evitar o envio acidental de arquivos locais que contenham segredos. Dentre eles:
+## Auditoria pré-commit
 
-- Qualquer arquivo com extensão `.env`, `.env.local`, `.env.development.local`, `.env.production.local`, etc.
-- Chaves SSH privadas e públicas (`id_rsa`, `id_ed25519`).
-- Pastas temporárias de sessão (`.npm/`, `.cache/`, `.sass-cache/`).
-- Dumps e logs locais de depuração contendo dados corporativos de projetos comerciais.
-- Dados de banco de dados locais `.db`, `.sqlite`, `.sql`.
-
----
-
-## 🛠️ Variáveis que Precisam ser Preenchidas Manualmente
-
-Caso você restaure este ambiente em uma nova máquina, os seguintes itens deverão ser gerados e preenchidos no arquivo local `.env` (que nunca deve ser enviado ao Git):
-
-```env
-# Chaves de IA
-GEMINI_API_KEY=sua_gemini_api_key_real
-OPENAI_API_KEY=sua_openai_api_key_real
-ANTHROPIC_API_KEY=sua_anthropic_api_key_real
-
-# GitHub e Deploy
-GITHUB_TOKEN=seu_github_personal_access_token
-VERCEL_TOKEN=seu_vercel_deployment_token
-
-# Supabase Local ou Cloud (Se usado em novos projetos base)
-SUPABASE_URL=https://seu-projeto.supabase.co
-SUPABASE_ANON_KEY=sua-anon-key-real
-SUPABASE_SERVICE_ROLE_KEY=sua-service-role-key-real
-```
-
----
-
-## 🔍 Como Rodar a Auditoria Local de Segredos
-
-Antes de subir qualquer commit para o GitHub, utilize o script automatizado de varredura incluído no repositório. Ele busca recursivamente por strings que contenham assinaturas típicas de segredos (chaves de API, senhas explícitas, strings de conexão).
-
-### Comando PowerShell:
-```powershell
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
-.\scripts\check-secrets.ps1
-```
-
-### Comando Bash:
 ```bash
 ./scripts/check-secrets.sh
+./scripts/check-secrets.sh --include-reference-catalog # auditoria separada; exemplos podem gerar achados
+git diff --check
+git status --short
 ```
 
-> [!WARNING]
-> Nunca use a flag `--force` no git para forçar o envio de arquivos que o `.gitignore` está ignorando por padrão, a menos que você tenha absoluta certeza de que não há dados confidenciais contidos. A segurança técnica do seu ambiente de trabalho depende da disciplina operacional ao gerenciar chaves.
+Scanner reduz risco, não prova ausência absoluta. Revise o diff, especialmente `.json`, `.yaml`, `.md`, exports n8n e relatórios.
+
+## Incidente
+
+1. Remova o valor do arquivo/histórico quando necessário.
+2. Revogue ou rotacione imediatamente na origem.
+3. Revise logs e uso indevido.
+4. Documente impacto sem repetir o secret.

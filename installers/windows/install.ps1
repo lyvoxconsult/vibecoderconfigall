@@ -41,13 +41,17 @@ Write-Host "`n🚀 [Passo 4/7] Sincronizando extensões de IDE..." -ForegroundCo
 Write-Host "`n🚀 [Passo 5/7] Otimizando configurações globais do Git..." -ForegroundColor Cyan
 & "$installerDir\configure-git.ps1"
 
-# 7. Configurações de Agentes (Codex & Antigravity)
-Write-Host "`n🚀 [Passo 6/7] Injetando regras de inteligência de Agentes..." -ForegroundColor Cyan
+# 7. Configurações de Agentes (Codex, Antigravity & OpenCode)
+Write-Host "`n🚀 [Passo 6/8] Injetando regras de inteligência de Agentes..." -ForegroundColor Cyan
 & "$installerDir\configure-codex.ps1"
 & "$installerDir\configure-antigravity.ps1"
 
+# 7b. Configurar skills do OpenCode
+Write-Host "`n🚀 [Passo 7/8] Configurando ecossistema de skills do OpenCode..." -ForegroundColor Cyan
+& "$installerDir\configure-opencode.ps1"
+
 # 8. Validação Final do Ambiente
-Write-Host "`n🚀 [Passo 7/7] Validando integridade operacional do sistema..." -ForegroundColor Cyan
+Write-Host "`n🚀 [Passo 8/8] Validando integridade operacional do sistema..." -ForegroundColor Cyan
 & "$installerDir\validate.ps1"
 
 Write-Host "====================================================" -ForegroundColor Cyan

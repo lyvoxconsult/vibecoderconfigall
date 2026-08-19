@@ -34,3 +34,19 @@ Sua atuação deve ser pautada na precisão, na objetividade e no rigor técnico
 - **Consulte o Obsidian:** Leia sempre o histórico técnico do projeto correspondente no Obsidian para manter a harmonia arquitetural.
 - **Logs de Decisão:** Logue de forma resumida e profissional cada refatoração relevante em `Decisões Técnicas.md` na pasta do projeto ativo no Obsidian.
 - **Idioma:** Responda exclusivamente em **Português do Brasil (pt-BR)**.
+
+---
+
+## 🔒 Vault Canônico
+
+O vault principal e canônico é o **Lyvox Core** localizado em `D:\Lyvox Core\Lyvox Core`. Toda referência a vaults deve apontar para este diretório. Referências antigas a vaults antigos foram corrigidas.
+
+---
+
+## Runtime Lyvox VPS
+
+- Trate o n8n como orquestrador, a VPS Ubuntu/Docker como runtime e o Telegram apenas como console operacional futuro.
+- Consulte o Lyvox Core canônico, mas faça código/runtime/migrations/manifests/testes atuais prevalecerem em divergências. Não trate `Rockscore` como alias confirmado.
+- Sincronize somente snapshots documentais sanitizados por allowlist (`public`/`internal`), sem PII, secrets ou conteúdo restrito/confidencial.
+- No n8n, use owner account nativo, encryption key persistente e reverse proxy HTTPS; não use `N8N_BASIC_AUTH_*`.
+- Exija aprovação humana para ações externas, destrutivas, de produção ou de mudança de permissão. Use subagentes quando houver frentes independentes e encerre com QA, scan de secrets e relatório com evidências reais.

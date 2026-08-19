@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -Eeuo pipefail
 
 # ==============================================================================
 # SCRIPT DE RESTAURAÇÃO DE CONFIGURAÇÕES (Bash/Linux) - restore-linux.sh

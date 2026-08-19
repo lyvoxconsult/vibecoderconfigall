@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -Eeuo pipefail
 
 # ==============================================================================
 # CONFIGURADOR DE PYTHON E UV (Linux) - install-python.sh

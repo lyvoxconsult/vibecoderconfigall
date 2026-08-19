@@ -1,0 +1,44 @@
+# Permissoes necessarias para o agente OpenCode acessar skills
+#
+# Estas permissoes ja estao configuradas em .config/opencode/agents/build.md
+# e sao automaticamente aplicadas nas sessoes do agente build.
+#
+# Para usar em outro agente, configure no opencode.json
+# ou use: opencode agent create --permission ...
+#
+# Permissoes de diretorio externo:
+#
+# Skills do ecossistema (.agents/skills/)
+# permission: external_directory
+# pattern: "C:\\Users\\pedro\\.agents\\skills\\*"
+# action: allow
+#
+# Skills do ecossistema (C:\.agents\skills\)
+# permission: external_directory
+# pattern: "C:\\.agents\\skills\\*"
+# action: allow
+#
+# Skills Claude (.claude/skills/)
+# permission: external_directory
+# pattern: "C:\\Users\\pedro\\.claude\\skills\\*"
+# action: allow
+#
+# Skills Claude (C:\.claude\skills\)
+# permission: external_directory
+# pattern: "C:\\.claude\\skills\\*"
+# action: allow
+#
+# Skills curadas do vibecoderconfigall
+# permission: external_directory
+# pattern: "C:\\Users\\pedro\\OneDrive\\Documentos\\00-Projetos\\10 - vibecoderconfigall\\skills\\*"
+# action: allow
+#
+# Skills Pack - Antigravity (~1426 skills)
+# permission: external_directory
+# pattern: "C:\\Users\\pedro\\OneDrive\\Documentos\\00-Projetos\\10 - vibecoderconfigall\\skills-pack\\antigravity\\*"
+# action: allow
+#
+# Skills Pack - Codex (~1054 skills)
+# permission: external_directory
+# pattern: "C:\\Users\\pedro\\OneDrive\\Documentos\\00-Projetos\\10 - vibecoderconfigall\\skills-pack\\codex\\*"
+# action: allow

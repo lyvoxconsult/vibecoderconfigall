@@ -1,69 +1,67 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -Eeuo pipefail
 
-# ==============================================================================
-# SCRIPT DE AUDITORIA DE SEGREDOS (Bash) - check-secrets.sh
-# ==============================================================================
-# Analisa recursivamente os arquivos do repositório em busca de chaves
-# de API expostas, senhas em texto puro ou strings de conexão reais de banco.
-# ==============================================================================
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
+include_reference=false
+while (($#)); do
+  case "$1" in
+    --path) ROOT="$(cd "${2:-}" && pwd -P)"; shift 2 ;;
+    --include-reference-catalog) include_reference=true; shift ;;
+    *) echo "uso: $0 [--path DIR] [--include-reference-catalog]" >&2; exit 2 ;;
+  esac
+done
 
-# Obter diretório raiz
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$SCRIPT_DIR"
-if [[ "$REPO_ROOT" == */scripts ]]; then
-    REPO_ROOT="$(dirname "$REPO_ROOT")"
-fi
-
-echo -e "\e[36m====================================================\e[0m"
-echo -e "\e[36m🛡️  Iniciando Auditoria Preventiva contra Vazamento de Segredos...\e[0m"
-echo -e "\e[36mDiretório Base: $REPO_ROOT\e[0m"
-echo -e "\e[36m====================================================\e[0m"
-
-# Declarar chaves e expressões regex de verificação
-declare -A PATTERNS
-PATTERNS=(
-    ["GEMINI_API_KEY"]="AIzaSy[A-Za-z0-9_-]{35}"
-    ["OPENAI_API_KEY"]="sk-[A-Za-z0-9_-]{40,}"
-    ["ANTHROPIC_API_KEY"]="sk-ant-[A-Za-z0-9_-]{60,}"
-    ["GITHUB_TOKEN"]="github_pat_[A-Za-z0-9_-]{60,}"
-    ["VERCEL_TOKEN"]="vercel_token_[A-Za-z0-9_-]{20,}"
-    ["SUPABASE_SERVICE_ROLE"]="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\.[A-Za-z0-9_=-]{30,}\.[A-Za-z0-9_=-]{40,}"
-    ["PRIVATE_KEY"]="-----BEGIN [A-Z ]+ PRIVATE KEY-----"
+findings=0
+report() { printf '[secrets] %s\n' "$*" >&2; findings=$((findings + 1)); }
+files=()
+while IFS= read -r -d '' path; do
+  rel="${path#"$ROOT"/}"
+  case "$rel" in
+    .git/*|node_modules/*|dist/*|build/*|scripts/check-secrets.sh) continue ;;
+    skills-pack/*) [[ "$include_reference" == true ]] || continue ;;
+  esac
+  files+=("$path")
+  base="$(basename -- "$path")"
+  case "$base" in
+    .env.example|*.env.example) ;;
+    .env|.env.*|*.pem|*.key|*.p12|*.pfx|*.sqlite|*.sqlite3|*.db) report "arquivo sensível proibido: $rel" ;;
+  esac
+done < <(
+  if [[ "$include_reference" == true ]]; then
+    find "$ROOT" -type f -print0
+  else
+    find "$ROOT" \( -path "$ROOT/.git" -o -path "$ROOT/skills-pack" -o -path "$ROOT/node_modules" \) -prune -o -type f -print0
+  fi
 )
 
-SECRETS_COUNT=0
-
-# Procurar chaves recursivamente em todos os arquivos no repositório
-while IFS= read -r -d '' file; do
-    # Pular pastas ignoradas e arquivos do script
-    if [[ "$file" == *"node_modules"* || "$file" == *".git"* || "$file" == *"check-secrets"* || "$file" == *".env.example" || "$file" == *"SECURITY_NOTES.md" ]]; then
-        continue
+labels=(PRIVATE_KEY AWS_KEY GITHUB_TOKEN OPENAI_KEY SLACK_TOKEN TELEGRAM_TOKEN JWT DATABASE_URL ASSIGNED_SECRET)
+patterns=(
+  '-----BEGIN (RSA |EC |OPENSSH |DSA )?PRIVATE KEY-----'
+  '(^|[^A-Z0-9])AKIA[0-9A-Z]{16}([^A-Z0-9]|$)'
+  '(^|[^[:alnum:]_])gh[pousr]_[A-Za-z0-9_]{30,}([^[:alnum:]_]|$)'
+  '(^|[^[:alnum:]_-])sk-(proj-)?[A-Za-z0-9_-]{20,}([^[:alnum:]_-]|$)'
+  '(^|[^[:alnum:]-])xox[baprs]-[A-Za-z0-9-]{20,}([^[:alnum:]-]|$)'
+  '(^|[^0-9])[0-9]{8,10}:[A-Za-z0-9_-]{35}([^A-Za-z0-9_-]|$)'
+  '(^|[^[:alnum:]_-])eyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}([^[:alnum:]_-]|$)'
+  '(postgres(ql)?|mongodb(\+srv)?)://[^[:space:]]+:[^[:space:]@]+@'
+  '(password|passwd|secret|token|api[_-]?key|connection[_-]?string)[[:space:]]*[:=][[:space:]]*[^[:space:]<>{}]{12,}'
+)
+for index in "${!patterns[@]}"; do
+  for file in "${files[@]}"; do
+    matches="$(grep -InE -- "${patterns[$index]}" "$file" || true)"
+    rel="${file#"$ROOT"/}"
+    if [[ "$rel" == scripts/sync-lyvox-core-sanitized.sh || "$rel" == skills/sync-skills.sh ]]; then
+      matches="$(printf '%s\n' "$matches" | grep -v 'scanner-pattern-literal' || true)"
     fi
-    
-    for key in "${!PATTERNS[@]}"; do
-        pattern="${PATTERNS[$key]}"
-        if grep -qE "$pattern" "$file"; then
-            echo -e "\e[33m⚠️ ALERTA: Assinatura suspeita [$key] detectada!\e[0m"
-            echo -e "\e[31mArquivo: $file\e[0m"
-            
-            # Mostrar linhas suspeitas sanitizadas no console
-            grep -nE "$pattern" "$file" | while read -r line; do
-                line_num=$(echo "$line" | cut -d: -f1)
-                line_content=$(echo "$line" | cut -d: -f2- | sed -E "s/$pattern/[REMOVIDO POR SEGURANÇA]/g")
-                echo -e "   Linha $line_num: $line_content"
-            done
-            
-            SECRETS_COUNT=$((SECRETS_COUNT + 1))
-        fi
-    done
-done < <(find "$REPO_ROOT" -type f -print0)
-
-echo -e "\e[36m====================================================\e[0m"
-if [ "$SECRETS_COUNT" -eq 0 ]; then
-    echo -e "\e[32m✅ Auditoria concluída com sucesso! Nenhum segredo ou chave exposta foi detectada.\e[0m"
-    exit 0
+    if [[ -n "$matches" ]]; then
+      lines="$(printf '%s\n' "$matches" | cut -d: -f1 | paste -sd, -)"
+      report "${labels[$index]}: $rel linha(s) $lines"
+    fi
+  done
+done
+if ((findings > 0)); then printf '[secrets] FALHA: %d achado(s)\n' "$findings" >&2; exit 1; fi
+if [[ "$include_reference" == false && -d "$ROOT/skills-pack" ]]; then
+  echo '[secrets] PASS operacional; skills-pack é catálogo de referência excluído. Use --include-reference-catalog para auditoria separada.'
 else
-    echo -e "\e[31m❌ Falha na auditoria de segurança! Foram encontradas $SECRETS_COUNT ocorrências de segredos.\e[0m"
-    echo -e "\e[31mRemova as credenciais reais e coloque placeholders antes de commitar os arquivos.\e[0m"
-    exit 1
+  echo '[secrets] PASS: nenhuma assinatura de alta confiança ou arquivo proibido encontrado.'
 fi

@@ -1,77 +1,73 @@
-# Guia de Início Rápido (QUICK_START)
+# Quick Start
 
-Este guia prático fornece os comandos diretos e imediatos para você clonar, instalar, configurar e validar o seu ambiente utilizando o **vibecoderconfigall**.
-
----
-
-## 💻 Configuração Automática no Windows
-
-Abra o **PowerShell** (com privilégios de Administrador, caso queira instalar softwares de sistema via Winget) e execute a sequência abaixo de forma sequencial:
-
-```powershell
-# 1. Navegue até o repositório ou clone-o
-cd C:\Users\pedro\OneDrive\Documentos\00-Projetos\vibecoderconfigall
-
-# 2. Desbloqueie temporariamente a política de execução de scripts locais
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
-
-# 3. Execute o instalador de orquestração do ambiente
-.\installers\windows\install.ps1
-
-# 4. Valide a conformidade e integridade da instalação
-.\installers\windows\validate.ps1
-```
-
----
-
-## 🐧 Configuração Automática no Linux (ou WSL)
-
-Abra o seu terminal **Bash** (Ubuntu/Debian) e execute a sequência abaixo de forma sequencial:
+## 1. Clonar e preparar
 
 ```bash
-# 1. Navegue até o repositório ou clone-o
-cd ~/00-Projetos/vibecoderconfigall
-
-# 2. Dê permissão de execução aos instaladores shell
-chmod +x installers/linux/*.sh scripts/*.sh
-
-# 3. Execute o script instalador principal
-./installers/linux/install.sh
-
-# 4. Valide a conformidade da instalação
-./installers/linux/validate.sh
+sudo apt update && sudo apt install -y git curl
+git clone https://github.com/SEU_USUARIO/vibecoderconfigall.git
+cd vibecoderconfigall
+chmod +x bootstrap.sh installers/linux/*.sh scripts/*.sh skills/*.sh
 ```
 
----
+## 2. Executar bootstrap
 
-## 🔄 Fluxo de Atualização Contínua (Backup)
-
-Sempre que fizer alterações relevantes no seu ambiente físico local (como instalar novas extensões no VS Code, mudar configurações de terminal ou prompts do Antigravity), você pode trazer essas atualizações para o repositório de forma limpa e higienizada.
-
-### No Windows:
-```powershell
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
-.\scripts\backup-current-environment.ps1
-```
-
-### No Linux:
 ```bash
-./scripts/backup-current-environment.sh
+./bootstrap.sh
 ```
 
----
+O instalador cria `/opt/lyvox/n8n/.env` com `N8N_ENCRYPTION_KEY` aleatória e mantém bind em `127.0.0.1`.
 
-## 🛡️ Auditoria Preventiva de Segredos (Check Secrets)
+Para revisar configuração antes de subir:
 
-Antes de realizar qualquer `git commit` ou `git push` no repositório público ou privado, certifique-se de passar o script de auditoria de segurança para garantir a ausência completa de chaves reais e secrets:
-
-### No Windows:
-```powershell
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
-.\scripts\check-secrets.ps1
-```
-
-### No Linux:
 ```bash
+START_N8N=0 ./bootstrap.sh
+sudo editor /opt/lyvox/n8n/.env
+./installers/linux/install-n8n.sh
+```
+
+Raiz alternativa: `LYVOX_ROOT=/opt/lyvox ./bootstrap.sh`.
+
+## 3. Subir ou verificar n8n
+
+```bash
+sudo docker compose --env-file /opt/lyvox/n8n/.env -f /opt/lyvox/n8n/docker-compose.yml up -d
+./scripts/healthcheck.sh
+./scripts/print-status.sh
+```
+
+Depois de sair e entrar novamente na sessão, o usuário adicionado ao grupo `docker` normalmente não precisa de `sudo`.
+
+Túnel SSH:
+
+```bash
+ssh -L 5678:127.0.0.1:5678 usuario@IP_DA_VPS
+```
+
+Acesse `http://127.0.0.1:5678` e crie a conta owner. Basic Auth legado não é suportado pelo n8n atual.
+
+## 4. QA e segurança
+
+```bash
+./scripts/validate-environment.sh
+./scripts/validate-repo.sh
 ./scripts/check-secrets.sh
+```
+
+## 5. Backup, restore e sync
+
+```bash
+sudo ./scripts/backup-n8n.sh
+sudo ./scripts/restore-n8n.sh --help
+./scripts/update-skills.sh --source "$HOME/.codex/skills" # dry-run
+./scripts/sync-lyvox-core-sanitized.sh --source /caminho/do/core --allowlist docs/lyvox-core-allowlist.txt
+```
+
+Teste restore separado. Para aplicar sync, use `--approval FILE --apply` somente depois de revisar o hash do dry-run. Nunca use Lyvox Core como destino.
+
+## Windows
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
+.\installers\windows\install.ps1
+.\installers\windows\validate.ps1
 ```

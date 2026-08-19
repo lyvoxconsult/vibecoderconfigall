@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -Eeuo pipefail
 
 # ==============================================================================
 # CONFIGURADOR GLOBAL DO GIT (Linux) - configure-git.sh

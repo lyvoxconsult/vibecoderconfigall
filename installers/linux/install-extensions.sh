@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -Eeuo pipefail
 
 # ==============================================================================
 # INSTALADOR DE EXTENSÕES VS CODE (Linux) - install-extensions.sh
