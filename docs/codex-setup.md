@@ -1,40 +1,40 @@
-# ⚙️ Configuração e Provisionamento do Codex
+# Configuracao do Codex no Mac
 
-O **Codex** é a sua engine robusta para desenvolvimento focado em backend, pipelines pesadas de engenharia de dados, segurança de código e auditoria de sistemas. Este guia orienta a restaurar, configurar e utilizar o Codex com eficiência máxima.
+Este guia orienta o agente a configurar Codex usando este repositorio como fonte de prompts, regras, MCPs e skills.
 
----
+## Arquivos Relevantes
 
-## 📂 Arquivos de Configuração Relacionados
+- `agents/codex-global-prompt.md`
+- `agents/global-agent-rules.md`
+- `agents/macbook-bootstrap-prompt.md`
+- `mcp/codex-mcp-config.example.toml`
+- `skills obrigatorias/`
 
-- [mcp/codex-mcp-config.example.toml](file:///C:/Users/pedro/OneDrive/Documentos/00-Projetos/vibecoderconfigall/mcp/codex-mcp-config.example.toml) (Estrutura segura de MCPs para Codex)
-- [agents/codex-global-prompt.md](file:///C:/Users/pedro/OneDrive/Documentos/00-Projetos/vibecoderconfigall/agents/codex-global-prompt.md) (System prompt customizado para Codex)
+## Procedimento
 
----
+1. Descobrir o diretorio real de configuracao do Codex no Mac.
+2. Criar backup de qualquer arquivo existente antes de sobrescrever.
+3. Copiar ou mesclar o prompt global e as regras de agente.
+4. Revisar o exemplo MCP e aplicar somente em arquivo local ignorado pelo Git.
+5. Copiar skills obrigatorias para o destino local confirmado.
+6. Rodar validadores do repositorio e scan de secrets.
 
-## 🛠️ Passo a Passo de Restauração de Ambiente
+## Skills Globais Atuais
 
-Para provisionar o Codex em um novo computador:
+O Mac deve receber o mesmo contrato operacional configurado no Windows:
 
-1. **Instale as Dependências de Sistema:**
-   Garanta que ferramentas de containerização e runtimes estejam presentes. Use:
-   - No Windows: `.\installers\windows\install-tools.ps1`
-   - No Linux: `./installers/linux/install-tools.sh`
+- pack obrigatorio de 10 skills em `skills obrigatorias/mandatory-10-skills.md`;
+- `find-skills` como descoberta obrigatoria em todo pedido;
+- `devpromptarchitect` por gatilho de prompt/arquitetura de prompt;
+- `sdd` por gatilho de Spec-Driven Development;
+- skills obrigatorias condicionais: `project-skill-audit`, `frontend-skill`, `backend-skill`, `devops-skill`, `playwright`, `postgres-best-practices`, `react-best-practices`, `api-security-testing` e `skill-scanner`.
 
-2. **Injete o System Prompt e Regras:**
-   Copie as regras globais e prompts customizados para a pasta de contexto padrão do Codex. O script de restore faz isso automaticamente:
-   ```powershell
-   .\scripts\restore-windows.ps1
-   ```
-   *Nota: O script copia o prompt global e as regras para o diretório de configurações operacionais do Codex local.*
+Para sincronizar conteudo revisado de skills no Mac, use o fluxo com dry-run e aprovacao descrito em `docs/SKILLS_INDEX.md`; nao copie `skills-pack/` inteiro para superficies globais.
 
-3. **Configure os Servidores MCP:**
-   Edite seu arquivo `codex-mcp-config.toml` preenchendo as chaves mascaradas de acordo com as instruções de [SECURITY_NOTES.md](../SECURITY_NOTES.md).
+## Boas Praticas
 
----
-
-## 💡 Boas Práticas ao Utilizar o Codex
-
-- **Foco em Conclusão Técnica:** O Codex é projetado para atuar como um engenheiro pleno/sênior de software. Evite diálogos desnecessários. Incentive-o a responder com blocos de códigos e testes acionáveis imediatos.
-- **Delegação via Subagentes:** Sempre que uma tarefa backend envolver migrações de banco, queries complexas de Supabase e fluxos complexos de deploy, ordene que o Codex crie um plano de execução detalhado e utilize subagentes especializados para as entregas de cada módulo.
-- **Consistência de Tipagem:** Ao trabalhar com TypeScript ou Python, exija que o Codex siga à risca padrões estritos de tipagem e utilize schemas de validação como Zod ou Pydantic para interações em endpoints de API.
-- **Segurança de Código:** Nunca finalize uma tarefa de refatoração no Codex sem solicitar que a IA rode o skill preventivo de segurança para auditar vulnerabilidades clássicas como injeção SQL, CORS mal configurado ou vazamento de escopo de variáveis.
+- Nao assumir caminhos absolutos.
+- Nao copiar `.env`, tokens, chaves ou arquivos de sessao.
+- Usar Context7 ou documentacao oficial quando houver duvida de API, SDK, CLI ou MCP.
+- Registrar no relatorio final os caminhos usados, arquivos alterados, comandos executados e pendencias.
+- Declarar explicitamente qualquer parte nao testada.

@@ -1,14 +1,14 @@
 # Índice seguro de skills
 
-Fonte operacional: `skills/skills-manifest.json`. O manifest contém 11 entradas: dez disponíveis no ambiente consultado e `lyvox-core-reader` pendente de criação/revisão. `devpromptarchitect` integra o conjunto obrigatório deste repositório.
+Fonte operacional: `skills obrigatorias/skills-manifest.json`. O manifest registra o pack obrigatório, `find-skills`, skills adicionais por gatilho e skills obrigatórias condicionais por domínio. `lyvox-core-reader` permanece pendente de criação/revisão e não deve ser simulada.
 
-`skills-pack/` é catálogo histórico de referência. Ele não é fonte confiável automática, não é copiado integralmente para a VPS e pode conter exemplos que acionam scanners de secrets. Licença, proveniência, symlinks e conteúdo devem ser revisados por skill.
+`skills-pack/` é catálogo histórico de referência. Ele não é fonte confiável automática, não é copiado integralmente para ambientes globais e pode conter exemplos que acionam scanners de secrets. Licença, proveniência, symlinks e conteúdo devem ser revisados por skill.
 
 ## Fluxo autorizado
 
 ```bash
 ./scripts/update-skills.sh --source "$HOME/.codex/skills"
-cp skills/skills-approval.example /tmp/skills-approval
+cp "skills obrigatorias/skills-approval.example" /tmp/skills-approval
 # preencher reviewer e REVIEW_SELECTION_SHA256 exibido no dry-run
 ./scripts/update-skills.sh --source "$HOME/.codex/skills" --approval /tmp/skills-approval --apply
 ```

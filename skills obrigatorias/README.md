@@ -2,7 +2,9 @@
 
 O arquivo canônico é [skills-manifest.json](skills-manifest.json). Ele registra o baseline operacional e seu estado observado; não autoriza instalação automática.
 
-- Dez skills estavam disponíveis no ambiente consultado.
+- O pack obrigatório usa `ponytail` como baseline global.
+- `find-skills` é obrigatório como etapa de descoberta em todo pedido.
+- Skills condicionais por domínio foram adicionadas para frontend, backend, DevOps, browser/Playwright, Postgres/Supabase, React/Next.js, segurança de API, auditoria de skills e scanner de skills externas.
 - `lyvox-core-reader` está ausente e exige criação/revisão antes de uso.
 - `devpromptarchitect` é obrigatória quando acionada por prompt, arquitetura de prompt ou preparação de tarefa técnica.
 - `skills-pack/` é referência histórica, não catálogo autorizado para cópia integral.
@@ -10,16 +12,16 @@ O arquivo canônico é [skills-manifest.json](skills-manifest.json). Ele registr
 ## Instalar apenas metadados
 
 ```bash
-./skills/install-skills.sh --target /opt/lyvox/skills
+"./skills obrigatorias/install-skills.sh" --target <LOCAL_AGENT_ROOT>/skills
 ```
 
 ## Sincronizar conteúdo revisado
 
 ```bash
-./skills/sync-skills.sh --source "$HOME/.codex/skills"
-cp skills/skills-approval.example /tmp/skills-approval
+"./skills obrigatorias/sync-skills.sh" --source "$HOME/.codex/skills"
+cp "skills obrigatorias/skills-approval.example" /tmp/skills-approval
 # preencher approved_by e selection_sha256 exibido no dry-run
-./skills/sync-skills.sh --source "$HOME/.codex/skills" --approval /tmp/skills-approval --apply
+"./skills obrigatorias/sync-skills.sh" --source "$HOME/.codex/skills" --approval /tmp/skills-approval --apply
 ```
 
 O sync aceita somente nomes presentes no manifest com status disponível, exige `SKILL.md`, rejeita arquivos sensíveis e qualquer symlink. O hash de aprovação cobre o conteúdo selecionado e impede troca entre revisão e aplicação.

@@ -1,91 +1,161 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "manifestVersion": "1.0.0",
-  "generatedAt": "2026-07-12",
+  "generatedAt": "2026-08-24",
   "policy": {
     "mode": "reference-and-sync",
     "copySkillsIntoRepository": false,
-    "canonicalRoot": "C:\\Users\\pedro\\.codex\\skills",
-    "compatibilityRoot": "C:\\Users\\pedro\\.agents\\skills",
+    "canonicalRoot": "<CODEX_SKILLS_PATH>",
+    "compatibilityRoot": "<AGENTS_SKILLS_PATH>",
     "installOnlyAfterReview": true
   },
   "skills": [
     {
-      "name": "caveman",
+      "name": "ponytail",
       "required": "always",
-      "status": "available-canonical",
-      "canonical": "C:\\Users\\pedro\\.codex\\skills\\caveman\\SKILL.md",
-      "compatibility": "C:\\Users\\pedro\\.agents\\skills\\caveman\\SKILL.md"
+      "status": "available-canonical-and-compatibility",
+      "canonical": "<CODEX_SKILLS_PATH>/ponytail/SKILL.md",
+      "compatibility": "<AGENTS_SKILLS_PATH>/ponytail/SKILL.md"
     },
     {
       "name": "lyvox-core-reader",
       "required": "lyvox-knowledge-tasks",
       "status": "missing-local-review-required",
-      "canonical": "C:\\Users\\pedro\\.codex\\skills\\lyvox-core-reader\\SKILL.md",
-      "compatibility": "C:\\Users\\pedro\\.agents\\skills\\lyvox-core-reader\\SKILL.md"
+      "canonical": "<CODEX_SKILLS_PATH>/lyvox-core-reader/SKILL.md",
+      "compatibility": "<AGENTS_SKILLS_PATH>/lyvox-core-reader/SKILL.md"
     },
     {
       "name": "audit-context-building",
       "required": "significant-tasks",
       "status": "available-canonical",
-      "canonical": "C:\\Users\\pedro\\.codex\\skills\\audit-context-building\\SKILL.md",
-      "compatibility": "C:\\Users\\pedro\\.agents\\skills\\audit-context-building\\SKILL.md"
+      "canonical": "<CODEX_SKILLS_PATH>/audit-context-building/SKILL.md",
+      "compatibility": "<AGENTS_SKILLS_PATH>/audit-context-building/SKILL.md"
     },
     {
       "name": "deep-research",
       "required": "knowledge-gap-or-external-research",
       "status": "available-canonical",
-      "canonical": "C:\\Users\\pedro\\.codex\\skills\\deep-research\\SKILL.md",
-      "compatibility": "C:\\Users\\pedro\\.agents\\skills\\deep-research\\SKILL.md"
+      "canonical": "<CODEX_SKILLS_PATH>/deep-research/SKILL.md",
+      "compatibility": "<AGENTS_SKILLS_PATH>/deep-research/SKILL.md"
     },
     {
       "name": "concise-planning",
       "required": "multi-step-execution",
       "status": "available-canonical",
-      "canonical": "C:\\Users\\pedro\\.codex\\skills\\concise-planning\\SKILL.md",
-      "compatibility": "C:\\Users\\pedro\\.agents\\skills\\concise-planning\\SKILL.md"
+      "canonical": "<CODEX_SKILLS_PATH>/concise-planning/SKILL.md",
+      "compatibility": "<AGENTS_SKILLS_PATH>/concise-planning/SKILL.md"
     },
     {
       "name": "subagent-driven-development",
       "required": "independent-multi-domain-work",
       "status": "available-canonical",
-      "canonical": "C:\\Users\\pedro\\.codex\\skills\\subagent-driven-development\\SKILL.md",
-      "compatibility": "C:\\Users\\pedro\\.agents\\skills\\subagent-driven-development\\SKILL.md"
+      "canonical": "<CODEX_SKILLS_PATH>/subagent-driven-development/SKILL.md",
+      "compatibility": "<AGENTS_SKILLS_PATH>/subagent-driven-development/SKILL.md"
     },
     {
       "name": "architecture-skill",
       "required": "architecture-or-integration-changes",
       "status": "available-canonical",
-      "canonical": "C:\\Users\\pedro\\.codex\\skills\\architecture-skill\\SKILL.md",
-      "compatibility": "C:\\Users\\pedro\\.agents\\skills\\architecture-skill\\SKILL.md"
+      "canonical": "<CODEX_SKILLS_PATH>/architecture-skill/SKILL.md",
+      "compatibility": "<AGENTS_SKILLS_PATH>/architecture-skill/SKILL.md"
     },
     {
       "name": "security-skill",
       "required": "security-data-auth-or-infrastructure",
       "status": "available-canonical",
-      "canonical": "C:\\Users\\pedro\\.codex\\skills\\security-skill\\SKILL.md",
-      "compatibility": "C:\\Users\\pedro\\.agents\\skills\\security-skill\\SKILL.md"
+      "canonical": "<CODEX_SKILLS_PATH>/security-skill/SKILL.md",
+      "compatibility": "<AGENTS_SKILLS_PATH>/security-skill/SKILL.md"
     },
     {
       "name": "multiagent-qa-orchestration",
       "required": "significant-deliveries",
       "status": "available-canonical-and-compatibility",
-      "canonical": "C:\\Users\\pedro\\.codex\\skills\\multiagent-qa-orchestration\\SKILL.md",
-      "compatibility": "C:\\Users\\pedro\\.agents\\skills\\multiagent-qa-orchestration\\SKILL.md"
+      "canonical": "<CODEX_SKILLS_PATH>/multiagent-qa-orchestration/SKILL.md",
+      "compatibility": "<AGENTS_SKILLS_PATH>/multiagent-qa-orchestration/SKILL.md"
     },
     {
       "name": "documentation",
       "required": "significant-deliveries",
       "status": "available-canonical",
-      "canonical": "C:\\Users\\pedro\\.codex\\skills\\documentation\\SKILL.md",
-      "compatibility": "C:\\Users\\pedro\\.agents\\skills\\documentation\\SKILL.md"
+      "canonical": "<CODEX_SKILLS_PATH>/documentation/SKILL.md",
+      "compatibility": "<AGENTS_SKILLS_PATH>/documentation/SKILL.md"
     },
     {
       "name": "devpromptarchitect",
       "required": "prompt-architecture-or-explicit-trigger",
       "status": "available-canonical-and-compatibility",
-      "canonical": "C:\\Users\\pedro\\.codex\\skills\\devpromptarchitect\\SKILL.md",
-      "compatibility": "C:\\Users\\pedro\\.agents\\skills\\devpromptarchitect\\SKILL.md"
+      "canonical": "<CODEX_SKILLS_PATH>/devpromptarchitect/SKILL.md",
+      "compatibility": "<AGENTS_SKILLS_PATH>/devpromptarchitect/SKILL.md"
+    },
+    {
+      "name": "find-skills",
+      "required": "always-after-mandatory-pack-for-skill-discovery",
+      "status": "available-canonical-and-compatibility",
+      "canonical": "<CODEX_SKILLS_PATH>/find-skills/SKILL.md",
+      "compatibility": "<AGENTS_SKILLS_PATH>/find-skills/SKILL.md"
+    },
+    {
+      "name": "project-skill-audit",
+      "required": "conditional-skill-setup-or-project-skill-audit",
+      "status": "available-canonical",
+      "canonical": "<CODEX_SKILLS_PATH>/project-skill-audit/SKILL.md",
+      "compatibility": "<AGENTS_SKILLS_PATH>/project-skill-audit/SKILL.md"
+    },
+    {
+      "name": "frontend-skill",
+      "required": "conditional-frontend-ui",
+      "status": "available-canonical",
+      "canonical": "<CODEX_SKILLS_PATH>/frontend-skill/SKILL.md",
+      "compatibility": "<AGENTS_SKILLS_PATH>/frontend-skill/SKILL.md"
+    },
+    {
+      "name": "backend-skill",
+      "required": "conditional-backend-api-persistence",
+      "status": "available-canonical",
+      "canonical": "<CODEX_SKILLS_PATH>/backend-skill/SKILL.md",
+      "compatibility": "<AGENTS_SKILLS_PATH>/backend-skill/SKILL.md"
+    },
+    {
+      "name": "devops-skill",
+      "required": "conditional-devops-runtime-deploy",
+      "status": "available-canonical",
+      "canonical": "<CODEX_SKILLS_PATH>/devops-skill/SKILL.md",
+      "compatibility": "<AGENTS_SKILLS_PATH>/devops-skill/SKILL.md"
+    },
+    {
+      "name": "playwright",
+      "required": "conditional-browser-ui-flow-validation",
+      "status": "available-canonical",
+      "canonical": "<CODEX_SKILLS_PATH>/playwright/SKILL.md",
+      "compatibility": "<AGENTS_SKILLS_PATH>/playwright/SKILL.md"
+    },
+    {
+      "name": "postgres-best-practices",
+      "required": "conditional-postgres-supabase-sql",
+      "status": "available-canonical",
+      "canonical": "<CODEX_SKILLS_PATH>/postgres-best-practices/SKILL.md",
+      "compatibility": "<AGENTS_SKILLS_PATH>/postgres-best-practices/SKILL.md"
+    },
+    {
+      "name": "react-best-practices",
+      "required": "conditional-react-nextjs-performance",
+      "status": "available-canonical",
+      "canonical": "<CODEX_SKILLS_PATH>/react-best-practices/SKILL.md",
+      "compatibility": "<AGENTS_SKILLS_PATH>/react-best-practices/SKILL.md"
+    },
+    {
+      "name": "api-security-testing",
+      "required": "conditional-api-security-testing",
+      "status": "available-canonical",
+      "canonical": "<CODEX_SKILLS_PATH>/api-security-testing/SKILL.md",
+      "compatibility": "<AGENTS_SKILLS_PATH>/api-security-testing/SKILL.md"
+    },
+    {
+      "name": "skill-scanner",
+      "required": "conditional-before-external-skill-adoption",
+      "status": "available-canonical",
+      "canonical": "<CODEX_SKILLS_PATH>/skill-scanner/SKILL.md",
+      "compatibility": "<AGENTS_SKILLS_PATH>/skill-scanner/SKILL.md"
     }
   ]
 }
