@@ -29,7 +29,7 @@ O Mac deve receber o mesmo contrato operacional configurado no Windows:
 - `sdd` por gatilho de Spec-Driven Development;
 - skills obrigatorias condicionais: `project-skill-audit`, `frontend-skill`, `backend-skill`, `devops-skill`, `playwright`, `postgres-best-practices`, `react-best-practices`, `api-security-testing` e `skill-scanner`.
 
-Para sincronizar conteudo revisado de skills no Mac, use o fluxo com dry-run e aprovacao descrito em `docs/SKILLS_INDEX.md`; nao copie `skills-pack/` inteiro para superficies globais.
+Para sincronizar conteudo revisado de skills no Mac, use o fluxo com dry-run e aprovacao descrito em `docs/SKILLS_INDEX.md`; nao copie catalogos brutos inteiros para superficies globais.
 
 ## Boas Praticas
 

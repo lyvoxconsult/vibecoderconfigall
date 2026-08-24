@@ -1,5 +1,15 @@
 # Histórico de Alterações (CHANGELOG)
 
+## [1.4.0] - 2026-08-24
+
+### Removed
+- Escopo de runtime remoto, Docker, instaladores Linux e automacoes fora do pacote Mac.
+- Conteudo especifico de orquestradores externos que nao fazem parte do setup principal.
+
+### Changed
+- Repositorio consolidado como pacote portatil de configuracao para Mac, Codex, Antigravity, skills, MCPs, prompts, Obsidian e validadores.
+- Documentacao de seguranca simplificada para Zero Leak e configuracao reutilizavel.
+
 ## [1.3.0] - 2026-07-12
 
 ### Added
@@ -8,24 +18,19 @@
 - `.gitattributes` para preservar LF nos scripts Linux.
 
 ### Changed
-- n8n atualizado para `2.29.10`, com task runners habilitados.
 - Restore endurecido com checksum, allowlist de membros, bloqueio de links/traversal e backup preventivo.
 - Catálogo bruto de skills removido do bootstrap automático; instalação agora é explicitamente revisada.
 
 ## [1.2.0] - 2026-07-12
 
 ### Added
-- Bootstrap modular para VPS Ubuntu/Debian com estrutura `/opt/lyvox` configurável.
-- Docker Engine/Compose e runtime n8n persistente com healthcheck e bind local.
-- Scripts de validação, status, backup, restore, atualização e sync seguro.
+- Scripts de validação, atualização e sync seguro de configuracoes revisadas.
 - Governança do snapshot Lyvox Core, manifest de skills, subagentes e relatórios finais.
 
 ### Changed
-- README, Quick Start, prompts e segurança orientados a VPS/n8n.
-- Instalador Linux reorganizado em módulos idempotentes.
+- README, Quick Start, prompts e segurança orientados a configuracao sanitizada.
 
 ### Security
-- User management atual substitui Basic Auth removido do n8n.
 - Sync documental usa allowlist, dry-run e bloqueio por sensibilidade.
 - Templates usam placeholders; nenhum secret ou banco real foi copiado.
 
@@ -51,8 +56,8 @@ Todas as alterações estruturais do repositório **vibecoderconfigall** serão 
 ## [1.1.0] - 2026-07-07
 
 ### Added
-- Lyvox Core definido como Vault canônico (`D:\Lyvox Core\Lyvox Core`).
-- Pack obrigatório de 10 skills para agentes e IDEs (`skills/mandatory-10-skills.md`).
+- Lyvox Core definido como Vault canônico (`<OBSIDIAN_VAULT>`).
+- Pack obrigatório de 10 skills para agentes e IDEs (`skills obrigatorias/mandatory-10-skills.md`).
 - Documentação de atualização de referências de vaults antigos.
 - Guias para Codex e Antigravity usarem Lyvox Core.
 - Relatórios de migração e auditoria de skills (`reports/lyvox-core-migration-report.md`).
@@ -62,7 +67,7 @@ Todas as alterações estruturais do repositório **vibecoderconfigall** serão 
 - Referências operacionais ao vault antigo atualizadas para Lyvox Core em 10 arquivos de skills.
 - Links quebrados de SECURITY_NOTES.md corrigidos em README.md e docs/codex-setup.md.
 - Regras globais de agentes reforçadas com QA, segurança, documentação e leitura do Lyvox Core.
-- skills/README.md atualizado com seção obrigatória de 10 skills.
+- `skills obrigatorias/README.md` atualizado com seção obrigatória de 10 skills.
 
 ### Security
 - Reforçada política Zero Leak.

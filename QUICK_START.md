@@ -1,73 +1,70 @@
-# Quick Start
+# Quick Start MacBook
 
-## 1. Clonar e preparar
+## 1. Clonar
 
 ```bash
-sudo apt update && sudo apt install -y git curl
 git clone https://github.com/SEU_USUARIO/vibecoderconfigall.git
 cd vibecoderconfigall
-chmod +x bootstrap.sh installers/linux/*.sh scripts/*.sh skills/*.sh
 ```
 
-## 2. Executar bootstrap
+## 2. Validar o pacote
+
+Preferencialmente com PowerShell 7:
 
 ```bash
-./bootstrap.sh
+pwsh ./scripts/validate-repo.ps1
+pwsh ./scripts/check-secrets.ps1
 ```
 
-O instalador cria `/opt/lyvox/n8n/.env` com `N8N_ENCRYPTION_KEY` aleatória e mantém bind em `127.0.0.1`.
-
-Para revisar configuração antes de subir:
+Fallback em Bash:
 
 ```bash
-START_N8N=0 ./bootstrap.sh
-sudo editor /opt/lyvox/n8n/.env
-./installers/linux/install-n8n.sh
+bash ./scripts/validate-repo.sh
+bash ./scripts/check-secrets.sh
 ```
 
-Raiz alternativa: `LYVOX_ROOT=/opt/lyvox ./bootstrap.sh`.
+## 3. Entregar o prompt ao agente do Mac
 
-## 3. Subir ou verificar n8n
+Use o arquivo abaixo como instrucao principal:
+
+```text
+agents/macbook-bootstrap-prompt.md
+```
+
+Ele orienta o agente a:
+
+- descobrir os caminhos reais do macOS antes de copiar arquivos;
+- configurar Codex, Antigravity, MCPs, prompts e skills;
+- preservar segredos fora do Git;
+- usar Obsidian como fonte de contexto sem caminho fixo;
+- validar instalacao com comandos reais;
+- registrar pendencias sem simular sucesso.
+
+## 4. Configurar variaveis locais
 
 ```bash
-sudo docker compose --env-file /opt/lyvox/n8n/.env -f /opt/lyvox/n8n/docker-compose.yml up -d
-./scripts/healthcheck.sh
-./scripts/print-status.sh
+cp .env.example .env
 ```
 
-Depois de sair e entrar novamente na sessão, o usuário adicionado ao grupo `docker` normalmente não precisa de `sudo`.
+Preencha somente no Mac local. Nao commite `.env`.
 
-Túnel SSH:
+## 5. Ordem recomendada para o agente
 
-```bash
-ssh -L 5678:127.0.0.1:5678 usuario@IP_DA_VPS
-```
+1. Auditar ferramentas existentes no Mac: Git, Node, pnpm, Python, uv, Homebrew, VS Code, Codex, Antigravity e Obsidian.
+2. Ler `agents/global-agent-rules.md`, `agents/codex-global-prompt.md` e `agents/antigravity-global-prompt.md`.
+3. Revisar `skills obrigatorias/README.md` e `skills obrigatorias/skills-manifest.json`.
+4. Copiar somente skills aprovadas para os destinos locais reais.
+5. Aplicar exemplos em `configs/` trocando placeholders por caminhos descobertos no Mac.
+6. Rodar validadores e reportar o que foi aplicado, ignorado e pendente.
 
-Acesse `http://127.0.0.1:5678` e crie a conta owner. Basic Auth legado não é suportado pelo n8n atual.
+## 6. Criterio de pronto
 
-## 4. QA e segurança
+O setup so deve ser considerado pronto quando houver evidencia de:
 
-```bash
-./scripts/validate-environment.sh
-./scripts/validate-repo.sh
-./scripts/check-secrets.sh
-```
-
-## 5. Backup, restore e sync
-
-```bash
-sudo ./scripts/backup-n8n.sh
-sudo ./scripts/restore-n8n.sh --help
-./scripts/update-skills.sh --source "$HOME/.codex/skills" # dry-run
-./scripts/sync-lyvox-core-sanitized.sh --source /caminho/do/core --allowlist docs/lyvox-core-allowlist.txt
-```
-
-Teste restore separado. Para aplicar sync, use `--approval FILE --apply` somente depois de revisar o hash do dry-run. Nunca use Lyvox Core como destino.
-
-## Windows
-
-```powershell
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
-.\installers\windows\install.ps1
-.\installers\windows\validate.ps1
-```
+- repo validado;
+- secrets ausentes dos arquivos versionados;
+- prompts globais instalados no destino correto;
+- skills obrigatorias copiadas ou justificadamente pendentes;
+- MCPs configurados com placeholders seguros ou credenciais locais fora do Git;
+- Obsidian referenciado por caminho local confirmado no Mac;
+- limitacoes documentadas.

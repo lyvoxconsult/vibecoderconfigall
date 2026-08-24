@@ -1,44 +1,22 @@
-# Permissoes necessarias para o agente OpenCode acessar skills
-#
-# Estas permissoes ja estao configuradas em .config/opencode/agents/build.md
-# e sao automaticamente aplicadas nas sessoes do agente build.
-#
-# Para usar em outro agente, configure no opencode.json
-# ou use: opencode agent create --permission ...
-#
-# Permissoes de diretorio externo:
-#
-# Skills do ecossistema (.agents/skills/)
+# Permissoes exemplo para OpenCode no Mac.
+# Substitua os placeholders pelos caminhos reais descobertos localmente.
+
+# Skills locais do ecossistema
 # permission: external_directory
-# pattern: "C:\\Users\\pedro\\.agents\\skills\\*"
+# pattern: "<HOME>/.agents/skills/*"
 # action: allow
-#
-# Skills do ecossistema (C:\.agents\skills\)
+
+# Skills Claude, se existirem
 # permission: external_directory
-# pattern: "C:\\.agents\\skills\\*"
+# pattern: "<HOME>/.claude/skills/*"
 # action: allow
-#
-# Skills Claude (.claude/skills/)
+
+# Skills curadas deste repositorio
 # permission: external_directory
-# pattern: "C:\\Users\\pedro\\.claude\\skills\\*"
+# pattern: "<REPO_ROOT>/skills obrigatorias/*"
 # action: allow
-#
-# Skills Claude (C:\.claude\skills\)
+
+# Vault Obsidian confirmado pelo usuario
 # permission: external_directory
-# pattern: "C:\\.claude\\skills\\*"
-# action: allow
-#
-# Skills curadas do vibecoderconfigall
-# permission: external_directory
-# pattern: "C:\\Users\\pedro\\OneDrive\\Documentos\\00-Projetos\\10 - vibecoderconfigall\\skills\\*"
-# action: allow
-#
-# Skills Pack - Antigravity (~1426 skills)
-# permission: external_directory
-# pattern: "C:\\Users\\pedro\\OneDrive\\Documentos\\00-Projetos\\10 - vibecoderconfigall\\skills-pack\\antigravity\\*"
-# action: allow
-#
-# Skills Pack - Codex (~1054 skills)
-# permission: external_directory
-# pattern: "C:\\Users\\pedro\\OneDrive\\Documentos\\00-Projetos\\10 - vibecoderconfigall\\skills-pack\\codex\\*"
+# pattern: "<OBSIDIAN_VAULT>/*"
 # action: allow

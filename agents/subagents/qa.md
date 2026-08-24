@@ -8,9 +8,9 @@ Provar o comportamento alterado e impedir conclusão baseada em suposição.
 
 - Sintaxe Bash e JSON.
 - `shellcheck` quando disponível.
-- `docker compose config` com placeholders seguros.
-- Idempotência dos instaladores em ambiente descartável/VPS de teste.
-- Healthcheck, persistência, backup e restore isolado.
+- Validadores PowerShell/POSIX com placeholders seguros.
+- Idempotência dos scripts de configuracao em ambiente descartável.
+- Integridade de manifests, paths obrigatorios e ausencia de secrets.
 - Scan de secrets e revisão de diff.
 - Links, paths, exemplos e coerência entre docs.
 

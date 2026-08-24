@@ -1,41 +1,27 @@
-# 🪐 Configuração e Provisionamento do Antigravity
+# Configuracao do Antigravity no Mac
 
-O **Antigravity** é o seu ambiente principal e IDE de desenvolvimento integrada de IA. Ele é projetado para atuar como arquiteto e designer de software, com capacidades avançadas de interações de UI/UX premium via Stitch, automações complexas do ecossistema e tomadas de decisão estruturadas.
+Este guia orienta o agente a configurar Antigravity usando este repositorio como fonte de prompt global, permissoes, skills e referencias.
 
----
+## Arquivos Relevantes
 
-## 📂 Arquivos de Configuração Relacionados
+- `agents/antigravity-global-prompt.md`
+- `agents/global-agent-rules.md`
+- `configs/antigravity/config.example.json`
+- `skills obrigatorias/`
 
-- [configs/antigravity/config.example.json](file:///C:/Users/pedro/OneDrive/Documentos/00-Projetos/vibecoderconfigall/configs/antigravity/config.example.json) (Configurações de permissões globais de arquivos e caminhos de sistema)
-- [agents/antigravity-global-prompt.md](file:///C:/Users/pedro/OneDrive/Documentos/00-Projetos/vibecoderconfigall/agents/antigravity-global-prompt.md) (System prompt customizado para Antigravity)
+## Procedimento
 
----
+1. Descobrir o diretorio real de configuracao do Antigravity no Mac.
+2. Criar backup de configuracoes existentes antes de sobrescrever.
+3. Copiar ou mesclar o prompt global.
+4. Adaptar `configs/antigravity/config.example.json` com caminhos locais confirmados.
+5. Dar acesso somente aos diretorios necessarios: projetos, vault Obsidian e skills aprovadas.
+6. Usar apenas skills revisadas e aprovadas individualmente; nao instalar catalogos brutos automaticamente.
+7. Validar que Antigravity consegue ler os arquivos configurados.
 
-## 🛠️ Passo a Passo de Restauração de Ambiente
+## Boas Praticas
 
-Para provisionar as configurações de comportamento e permissão do Antigravity em um novo computador:
-
-1. **Instale e Provisione o Diretório do Config:**
-   Garanta que a pasta do Antigravity existe na raiz do seu usuário do sistema:
-   `C:\Users\SEU_USUARIO\.gemini\config`
-
-2. **Injete as Permissões Seguras:**
-   Utilize o script de restauração que copia o arquivo de configurações e permissões globais, ajustando os nomes dos caminhos de diretório locais:
-   ```powershell
-   .\scripts\restore-windows.ps1
-   ```
-
-3. **Valide a Configuração Local:**
-   Execute o script de validação para garantir que o Antigravity reconhece o ambiente, as permissões para ler e escrever no Obsidian e nos projetos, e que os MCPs associados (Stitch, Supabase) estão ativos e comunicando com sucesso:
-   ```powershell
-   .\installers\windows\validate.ps1
-   ```
-
----
-
-## 💡 Princípios e Práticas Recomendadas
-
-- **Aesthetics First (Visual Premium):** O Antigravity tem o compromisso de criar e manter interfaces ricas de altíssima qualidade visual (cores harmoniosas, gradientes suaves, tipografia refinada do Google Fonts e animações fluidas via micro-interações). Exija sempre um visual "uau" no front-end.
-- **Delegação Ativa via Subagentes:** O Antigravity deve ser instruído a usar ativamente o subagente especialista em cada fase do ciclo de desenvolvimento, delegando a escrita de testes unitários ou auditorias de segurança para instâncias focadas.
-- **Uso Estrito de Skills:** As skills contidas na pasta `/skills/` do repositório devem ser carregadas e consultadas constantemente pelo Antigravity para manter a padronização e evitar a criação de gambiarras ou duplicações arquiteturais.
-- **Validação Antecipada (Zero Bugs):** Antes de concluir qualquer tarefa e dar a entrega por terminada, o Antigravity deve simular ou executar testes funcionais na aplicação e gerar relatórios de conformidade. É proibido simular sucesso de forma verbal.
+- Usar subagentes ou papeis separados para arquitetura, UI, seguranca e QA quando houver varias frentes.
+- Validar UI com browser/screenshot quando a tarefa for visual.
+- Nao declarar sucesso sem teste real.
+- Registrar pendencias e limitacoes no relatorio final.

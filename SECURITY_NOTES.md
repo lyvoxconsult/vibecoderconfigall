@@ -5,28 +5,11 @@ Este repositório segue Zero Leak: configuração reutilizável pode ser version
 ## Proibido versionar ou sincronizar
 
 - `.env` real e variantes locais.
-- Tokens, senhas, cookies, JWTs, chaves SSH/TLS, connection strings e credenciais n8n.
-- SQLite/PostgreSQL, dumps, volumes Docker, backups e logs reais.
+- Tokens, senhas, cookies, JWTs, chaves SSH/TLS, connection strings e credenciais de servicos.
+- SQLite/PostgreSQL, dumps, volumes, backups e logs reais.
 - Dados pessoais, bancários, societários, jurídicos, financeiros, de clientes ou leads.
 - Conteúdo Lyvox Core `confidential`, `restricted` ou `secret`.
-- Workflows com dados de execução ou credenciais embutidas.
-
-## n8n
-
-- Defina `N8N_ENCRYPTION_KEY` forte antes da primeira inicialização e guarde-a junto ao backup, fora do Git.
-- A perda da chave impede descriptografar credenciais restauradas.
-- n8n atual usa user management obrigatório; `N8N_BASIC_AUTH_*` não é suportado desde 1.0.
-- O Compose liga `5678` em loopback. Para acesso remoto, use túnel SSH ou HTTPS com proxy reverso.
-- Não exponha Docker API, banco, Redis, Qdrant, Ollama ou serviços internos.
-- Restrinja retenção de execuções e revise logs para PII.
-
-## VPS
-
-- Use usuário não-root com `sudo` e SSH por chave.
-- Desative senha/root somente após confirmar acesso alternativo.
-- Abra no UFW apenas SSH e, com proxy TLS, 80/443.
-- Grupo `docker` equivale a privilégio root; limite membros.
-- Atualize sistema, Docker e n8n com backup prévio e rollback definido.
+- Workflows, exports ou configuracoes com dados de execucao ou credenciais embutidas.
 
 ## Lyvox Core
 
@@ -43,7 +26,7 @@ git diff --check
 git status --short
 ```
 
-Scanner reduz risco, não prova ausência absoluta. Revise o diff, especialmente `.json`, `.yaml`, `.md`, exports n8n e relatórios.
+Scanner reduz risco, não prova ausência absoluta. Revise o diff, especialmente `.json`, `.yaml`, `.md`, exports e relatórios.
 
 ## Incidente
 

@@ -3,8 +3,8 @@ set -Eeuo pipefail
 umask 027
 
 readonly REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
-manifest="${SKILLS_MANIFEST:-$REPO_ROOT/skills/skills-manifest.json}"
-target="${SKILLS_DESTINATION:-${LYVOX_ROOT:-/opt/lyvox}/skills/codex}"
+manifest="${SKILLS_MANIFEST:-$REPO_ROOT/skills obrigatorias/skills-manifest.json}"
+target="${SKILLS_DESTINATION:-${LYVOX_ROOT:-<LOCAL_AGENT_ROOT>}/skills/codex}"
 sources="${SKILLS_SOURCE_PATHS:-}"
 approval="${SKILLS_APPROVAL_FILE:-}"
 apply=false

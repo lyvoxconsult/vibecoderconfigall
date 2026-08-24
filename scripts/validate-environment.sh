@@ -1,12 +1,50 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"; LYVOX_ROOT="${LYVOX_ROOT:-/opt/lyvox}"; errors=0
-for command_name in curl git jq rsync openssl docker; do if command -v "$command_name" >/dev/null 2>&1; then printf '[validate] ok: %s\n' "$command_name"; else printf '[validate] missing: %s\n' "$command_name" >&2; ((errors+=1)); fi; done
-if command -v docker >/dev/null 2>&1 && ! docker compose version >/dev/null 2>&1; then echo "[validate] Docker Compose plugin ausente" >&2; ((errors+=1)); fi
-for path in "$LYVOX_ROOT" "$LYVOX_ROOT/n8n" "$LYVOX_ROOT/backups"; do [[ -d "$path" ]] || { echo "[validate] diretório ausente: $path" >&2; ((errors+=1)); }; done
-if [[ -f "$LYVOX_ROOT/n8n/.env" ]]; then key="$(sed -n 's/^N8N_ENCRYPTION_KEY=//p' "$LYVOX_ROOT/n8n/.env" | tail -n1)"; [[ ${#key} -ge 32 && "$key" != *CHANGE_ME* ]] || { echo "[validate] encryption key inválida" >&2; ((errors+=1)); }; fi
-if command -v docker >/dev/null 2>&1 && [[ -f "$LYVOX_ROOT/n8n/docker-compose.yml" ]]; then (cd "$LYVOX_ROOT/n8n" && docker compose config --quiet) || ((errors+=1)); fi
-if [[ "${START_N8N:-1}" == 1 && -f "$LYVOX_ROOT/n8n/.env" ]]; then bash "$REPO_ROOT/scripts/healthcheck.sh" || ((errors+=1)); else echo "[validate] healthcheck runtime omitido (START_N8N=0)"; fi
+
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+errors=0
+
+for command_name in git bash; do
+  if command -v "$command_name" >/dev/null 2>&1; then
+    printf '[validate] ok: %s\n' "$command_name"
+  else
+    printf '[validate] missing: %s\n' "$command_name" >&2
+    ((errors+=1))
+  fi
+done
+
+for optional_command in pwsh node python3 rg jq; do
+  if command -v "$optional_command" >/dev/null 2>&1; then
+    printf '[validate] optional ok: %s\n' "$optional_command"
+  else
+    printf '[validate] optional missing: %s\n' "$optional_command"
+  fi
+done
+
+required_paths=(
+  "$REPO_ROOT/agents"
+  "$REPO_ROOT/configs"
+  "$REPO_ROOT/docs"
+  "$REPO_ROOT/mcp"
+  "$REPO_ROOT/scripts"
+  "$REPO_ROOT/skills obrigatorias"
+)
+
+for path in "${required_paths[@]}"; do
+  if [[ -e "$path" ]]; then
+    printf '[validate] path ok: %s\n' "${path#$REPO_ROOT/}"
+  else
+    printf '[validate] missing path: %s\n' "${path#$REPO_ROOT/}" >&2
+    ((errors+=1))
+  fi
+done
+
+bash "$REPO_ROOT/scripts/validate-repo.sh" || ((errors+=1))
 bash "$REPO_ROOT/scripts/check-secrets.sh" || ((errors+=1))
-((errors == 0)) || { echo "[validate] $errors erro(s)" >&2; exit 1; }
-echo "[validate] ambiente válido"
+
+((errors == 0)) || {
+  echo "[validate] $errors erro(s)" >&2
+  exit 1
+}
+
+echo "[validate] ambiente valido"

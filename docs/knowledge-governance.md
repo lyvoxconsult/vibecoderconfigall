@@ -4,10 +4,9 @@
 
 | Domínio | Fonte primária | Regra de desempate |
 |---|---|---|
-| Conhecimento institucional | `D:\Lyvox Core\Lyvox Core` | autoridade, status, confiança e vigência do frontmatter |
+| Conhecimento institucional | `<OBSIDIAN_VAULT>` | autoridade, status, confiança e vigência do frontmatter |
 | Desenvolvimento | código, migrations, manifests e testes atuais | o estado executável prevalece sobre docs antigas |
-| Skills | `C:\Users\pedro\.codex\skills` | `.agents\skills` é compatibilidade quando existir |
-| Runtime VPS | configuração e estado observado na VPS | validar antes de documentar como atual |
+| Skills | `<LOCAL_SKILLS_PATH>` | mirrors de compatibilidade podem existir quando aprovados |
 
 `Rockscore` é um termo não confirmado neste contexto. Não o trate como alias, produto ou substituto do Lyvox Core sem evidência e aprovação.
 
@@ -15,7 +14,7 @@
 
 - `public`: pode ser publicado após scan e revisão.
 - `internal`: pode entrar em snapshot sanitizado somente por allowlist e aprovação.
-- `restricted`, `confidential`, `secret`: nunca entram no Git ou na VPS documental compartilhada.
+- `restricted`, `confidential`, `secret`: nunca entram no Git ou em snapshots documentais compartilhados.
 - ausente/desconhecida: bloqueada até classificação humana.
 
 Além da classificação, remova PII, segredos, dados de clientes, jurídicos, financeiros, bancários e societários. Sanitização não converte automaticamente material restrito em publicável.

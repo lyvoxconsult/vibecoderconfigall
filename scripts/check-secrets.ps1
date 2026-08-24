@@ -1,6 +1,5 @@
 param(
-    [string]$Path,
-    [switch]$IncludeReferenceCatalog
+    [string]$Path
 )
 
 $repoRoot = if ($Path) { (Resolve-Path -LiteralPath $Path).Path } else { Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path) }
@@ -19,8 +18,7 @@ $forbiddenNames = @('.env','id_rsa','id_ed25519')
 $findings = 0
 $files = Get-ChildItem -LiteralPath $repoRoot -Recurse -File -ErrorAction SilentlyContinue | Where-Object {
     $relative = $_.FullName.Substring($repoRoot.Length).TrimStart('\')
-    $excluded = $relative -like '.git\*' -or $relative -like 'node_modules\*' -or $relative -like 'dist\*' -or $relative -like 'build\*' -or $relative -eq 'scripts\check-secrets.ps1'
-    if (-not $IncludeReferenceCatalog -and $relative -like 'skills-pack\*') { $excluded = $true }
+    $excluded = $relative -like '.git\*' -or $relative -like 'node_modules\*' -or $relative -like 'dist\*' -or $relative -like 'build\*' -or $relative -like 'graphify-out\*' -or $relative -eq 'scripts\check-secrets.ps1'
     -not $excluded
 }
 foreach ($file in $files) {
@@ -41,7 +39,5 @@ foreach ($file in $files) {
     }
 }
 if ($findings -gt 0) { Write-Error "Security scan falhou: $findings achado(s)."; exit 1 }
-if (-not $IncludeReferenceCatalog -and (Test-Path -LiteralPath (Join-Path $repoRoot 'skills-pack'))) {
-    Write-Host 'PASS operacional; skills-pack excluído. Use -IncludeReferenceCatalog para auditoria separada.'
-} else { Write-Host 'PASS: nenhuma assinatura de alta confiança ou arquivo proibido encontrado.' }
+Write-Host 'PASS: nenhuma assinatura de alta confiança ou arquivo proibido encontrado.'
 exit 0

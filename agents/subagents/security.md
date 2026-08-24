@@ -8,7 +8,7 @@ Auditar secrets, fronteiras de confiança, permissões, exposição de rede, bac
 
 - Bloquear `.env` real, credenciais, PII e material `restricted`, `confidential` ou `secret`.
 - Confirmar allowlist e classificação antes de snapshot Lyvox Core.
-- Revisar portas, TLS, owner account nativo do n8n, encryption key e scopes.
+- Revisar fronteiras de confiança, permissões locais, placeholders, scopes e arquivos que possam carregar segredos.
 - Rodar scanners disponíveis sem imprimir valores encontrados.
 - Tratar ausência de achado como evidência limitada, não prova absoluta.
 

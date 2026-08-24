@@ -7,7 +7,7 @@ O arquivo canônico é [skills-manifest.json](skills-manifest.json). Ele registr
 - Skills condicionais por domínio foram adicionadas para frontend, backend, DevOps, browser/Playwright, Postgres/Supabase, React/Next.js, segurança de API, auditoria de skills e scanner de skills externas.
 - `lyvox-core-reader` está ausente e exige criação/revisão antes de uso.
 - `devpromptarchitect` é obrigatória quando acionada por prompt, arquitetura de prompt ou preparação de tarefa técnica.
-- `skills-pack/` é referência histórica, não catálogo autorizado para cópia integral.
+- Catalogos brutos externos sao referencia, nao fonte autorizada para cópia integral.
 
 ## Instalar apenas metadados
 

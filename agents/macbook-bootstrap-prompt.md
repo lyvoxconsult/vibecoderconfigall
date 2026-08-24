@@ -30,7 +30,7 @@ Fora de escopo:
 
 - Copiar credenciais reais para o Git.
 - Copiar codigo comercial ou documentos restritos para este repositorio.
-- Instalar todo o `skills-pack/` automaticamente sem revisao.
+- Instalar catalogos brutos de skills automaticamente sem revisao.
 - Alterar projetos do usuario sem pedido explicito.
 - Declarar sucesso sem validacao real.
 

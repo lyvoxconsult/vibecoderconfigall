@@ -3,13 +3,16 @@
     "browserJsExecutionPolicy": "BROWSER_JS_EXECUTION_POLICY_TURBO",
     "globalPermissionGrants": {
       "allow": [
-        "read_file(C:\\Users\\SEU_USUARIO\\Projects)",
-        "read_file(D:\\Obsidian)",
-        "read_file(C:\\Users\\SEU_USUARIO\\OneDrive\\Documentos\\00-Projetos)",
-        "write_file(D:\\Obsidian\\obsidian\\Índice Geral de Projetos.md)",
-        "write_file(D:\\Obsidian\\obsidian\\Mapa de Tecnologias.md)",
-        "write_file(D:\\Obsidian\\obsidian\\Pendências Gerais dos Projetos.md)",
-        "command($projects)"
+        "read_file(<PROJECTS_ROOT>)",
+        "read_file(<OBSIDIAN_VAULT>)",
+        "read_file(<LOCAL_SKILLS_PATH>)",
+        "write_file(<OBSIDIAN_VAULT>/<PROJECT_CONTEXT_NOTE>.md)",
+        "command(git)",
+        "command(node)",
+        "command(npm)",
+        "command(pnpm)",
+        "command(python3)",
+        "command(uv)"
       ]
     }
   }

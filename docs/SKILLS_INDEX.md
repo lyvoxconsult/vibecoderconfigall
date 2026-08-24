@@ -2,7 +2,7 @@
 
 Fonte operacional: `skills obrigatorias/skills-manifest.json`. O manifest registra o pack obrigatório, `find-skills`, skills adicionais por gatilho e skills obrigatórias condicionais por domínio. `lyvox-core-reader` permanece pendente de criação/revisão e não deve ser simulada.
 
-`skills-pack/` é catálogo histórico de referência. Ele não é fonte confiável automática, não é copiado integralmente para ambientes globais e pode conter exemplos que acionam scanners de secrets. Licença, proveniência, symlinks e conteúdo devem ser revisados por skill.
+O repositório não versiona catálogo bruto de skills. Skills específicas devem ser buscadas no catálogo local/canônico do ambiente, revisadas individualmente e instaladas somente quando fizerem sentido para a tarefa.
 
 ## Fluxo autorizado
 

@@ -6,9 +6,8 @@ Senhas, tokens, API keys, cookies, JWTs, chaves privadas, connection strings, cr
 
 ## Criação e armazenamento
 
-- Gerar `N8N_ENCRYPTION_KEY` uma vez com fonte criptográfica e mantê-la persistente; perdê-la pode impedir a leitura das credenciais.
-- Armazenar secrets na VPS fora do Git, com owner dedicado e modo `0600`.
-- No n8n, usar credentials nativas e scopes mínimos; não inserir tokens em Code nodes ou workflow JSON.
+- Armazenar secrets fora do Git, com owner dedicado e modo `0600` quando aplicável.
+- Usar credenciais nativas das ferramentas e scopes mínimos; não inserir tokens em código, prompts, exports ou JSON versionado.
 - Separar credenciais de desenvolvimento e produção.
 
 ## Uso e logs

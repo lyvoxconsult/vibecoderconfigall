@@ -1,65 +1,41 @@
-# 🧠 Estrutura do Obsidian como Segundo Cérebro (Second Brain)
+# Estrutura Recomendada de Obsidian
 
-O **Obsidian** atua como o seu cérebro digital e repositório central de conhecimento técnico, registro de decisões de engenharia, pendências de projetos comerciais e insights operacionais. A simbiose entre as suas ferramentas de IA (Codex e Antigravity) e o Obsidian é um dos pilares da sua alta performance.
+Este guia define como agentes devem usar Obsidian como fonte de contexto sem depender de caminho fixo.
 
-Este guia documenta o blueprint da estrutura de pastas do cofre e define as regras para que as IAs possam interagir e atualizar o cofre sem comprometer a organização ou duplicar informações.
+## Regra Principal
 
----
+O vault correto deve ser informado pelo usuario ou descoberto localmente no Mac. Nao assuma nome de pasta, drive, volume ou caminho absoluto.
 
-## 📂 Blueprint da Estrutura de Pastas do Obsidian
-
-O cofre estruturado em `D:\Obsidian\obsidian` segue a seguinte arquitetura:
+## Estrutura Sugerida
 
 ```text
-D:\Obsidian\obsidian/
-├── .obsidian/                      # Configurações do Obsidian (oculto e ignorado no Git)
-│
-├── AI-BRAIN/                       # Conhecimento operacional acumulado por IAs
-│   ├── Prompts Reutilizáveis.md    # Catálogo de prompts e system instructions
-│   ├── Padrões de Arquitetura.md    # Decisões de design de sistemas reutilizáveis
-│   └── Configurações de Runtimes.md # Dicas de provisionamento rápido de APIs e Docker
-│
-├── Projetos/                       # Pasta individual para cada sistema/cliente
-│   ├── Gerenciamento/              # Pasta do projeto Gerenciamento (exemplo)
-│   │   ├── 00 - Visão Geral.md     # Escopo, arquitetura, dependências e links úteis
-│   │   ├── Tarefas e Sprints.md    # TODO-list ativo do projeto
-│   │   └── Decisões Técnicas.md    # Registro de decisões (ex: escolha do Supabase)
-│   │
-│   ├── CacambasGoOficial/           # Pasta do projeto Caçambas Go
-│   │   ├── 00 - Visão Geral.md
-│   │   └── Decisões Técnicas.md
-│   │
-│   └── Lyvox.com/                  # Pasta do site Lyvox
-│       └── 00 - Visão Geral.md
-│
-├── 00 - Mapa Operacional do Vault.md # Índice geral de links e caminhos do cofre
-├── Índice Geral de Projetos.md     # Painel central listando status de cada projeto
-├── Mapa de Tecnologias.md          # Inventário de stacks recomendadas por nicho
-├── Pendências Gerais dos Projetos.md # Agregador central de bugs e pendências
-└── ARCHIVE/                        # Pasta de descarte para projetos e notas obsoletas
+<OBSIDIAN_VAULT>/
+  00-INBOX/
+  08-PROJETOS/
+  14-REGISTRY/
+  15-APRENDIZADOS/
+  30-REFERENCIAS/
+  ARCHIVE/
 ```
 
----
+Adapte a estrutura real do usuario. Nao crie, mova ou reorganize notas sem autorizacao.
 
-## 🤖 Como as IAs devem interagir com o Obsidian
+## Como Agentes Devem Consultar
 
-### 1. Leitura e Consulta a Documentos Auxiliares (Contexto)
-Tanto o Codex quanto o Antigravity possuem permissões de leitura recursivas na pasta `D:\Obsidian`. Sempre que uma tarefa envolver a modificação de um projeto (ex: `Gerenciamento` ou `CacambasGoOficial`), os agentes devem:
-- Consultar preventivamente o arquivo `00 - Visão Geral.md` do projeto correspondente para entender regras arquiteturais e stack.
-- Consultar `Mapa de Tecnologias.md` e `Índice Geral de Projetos.md` caso necessitem entender integrações entre sistemas do ecossistema.
+1. Identificar o projeto ou dominio da tarefa.
+2. Procurar notas de visao geral, decisoes tecnicas, pendencias e aprendizados.
+3. Tratar notas como contexto; o codigo e validacoes atuais prevalecem quando houver divergencia.
+4. Evitar leituras massivas sem necessidade.
 
-### 2. Escrita Técnica e Logs de Decisão (Pós-Tarefa)
-Ao finalizar com absoluto sucesso uma tarefa de refatoração estrutural, implementação de uma feature crítica ou resolução de um bug complexo, as IAs devem registrar esse aprendizado e mudança técnica:
-- **O que registrar:** O que mudou no código, as razões técnicas por trás da mudança, os potenciais efeitos colaterais e o que foi feito para mitigar falhas.
-- **Onde registrar:** No arquivo `Decisões Técnicas.md` da pasta do projeto correspondente.
-- **Evitar Duplicação:** As IAs não devem transcrever o código inteiro da feature na nota do Obsidian, mas sim resumir a lógica conceitual de forma sucinta e profissional, mantendo a nota limpa e focada em negócios e arquitetura de alto nível.
+## Como Agentes Devem Atualizar
 
----
+Ao final de trabalho relevante, registrar somente:
 
-## 🔒 Segurança e Privacidade das Notas do Obsidian
+- objetivo;
+- decisoes;
+- arquivos analisados ou alterados;
+- validacoes executadas;
+- riscos tratados;
+- pendencias e proximos passos.
 
-Como as notas do Obsidian residem no seu drive local e não são versionadas junto ao repositório público `vibecoderconfigall` (que armazena apenas os templates e modelos de Segundo Cérebro), você pode escrever livremente dados comerciais e descrições detalhadas do seu fluxo corporativo lá dentro.
-
-Para ver os templates e blueprints vazios que outras pessoas podem utilizar como base, acesse:
-- [obsidian/project-knowledge-base-template.md](file:///C:/Users/pedro/OneDrive/Documentos/00-Projetos/vibecoderconfigall/obsidian/project-knowledge-base-template.md)
-- [obsidian/second-brain-structure.md](file:///C:/Users/pedro/OneDrive/Documentos/00-Projetos/vibecoderconfigall/obsidian/second-brain-structure.md)
+Nao registrar segredos, logs longos, transcricoes de chat ou codigo inteiro.

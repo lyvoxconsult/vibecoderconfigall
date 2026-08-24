@@ -26,7 +26,7 @@
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
 
-  "terminal.integrated.defaultProfile.windows": "WSL (Ubuntu)",
+  "terminal.integrated.defaultProfile.osx": "zsh",
   "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font', 'FiraCode Nerd Font'",
 
   "git.autofetch": true,
