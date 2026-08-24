@@ -7,7 +7,7 @@ Esta skill define as metodologias comportamentais, operacionais e de engenharia 
 ## Skill global obrigatória: Ponytail
 
 - **Objetivo:** Aplicar em toda solicitação técnica a menor solução correta, seguindo YAGNI, reuso do código existente, biblioteca padrão e recursos nativos antes de abstrações ou dependências novas.
-- **Regra:** `ponytail` substitui `caveman` como baseline obrigatório. Nunca reduzir validação de entrada, prevenção de perda de dados, segurança, acessibilidade ou requisito explícito.
+- **Regra:** `ponytail` substitui o baseline anterior como padrão obrigatório. Nunca reduzir validação de entrada, prevenção de perda de dados, segurança, acessibilidade ou requisito explícito.
 
 ---
 

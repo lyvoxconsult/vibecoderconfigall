@@ -11,7 +11,7 @@ Copie e utilize este template quando for acionar um subagente especialista ou in
 
 ## 🔍 Contexto do Ambiente
 - **Projeto Ativo:** [Ex: Gerenciamento]
-- **Documento Auxiliar no Obsidian:** [Caminho do arquivo ex: `D:/Obsidian/...`]
+- **Documento Auxiliar no Obsidian:** [Caminho do arquivo ex: `<OBSIDIAN_VAULT>/...`]
 - **Arquivos Relacionados no Projeto:**
   - `path/to/file1.ts`
   - `path/to/file2.css`

@@ -32,11 +32,11 @@ Esta atualização consolidou o ecossistema Lyvox Core como vault principal, cor
 
 ## 3. Vault Canônico
 
-O Lyvox Core (`D:\Lyvox Core\Lyvox Core`) é definido como vault principal para todos os agentes e IDEs.
+O Lyvox Core (`<OBSIDIAN_VAULT>`) é definido como vault principal para todos os agentes e IDEs.
 
 ## 4. Pack Obrigatório de 10 Skills
 
-1. caveman — Clareza e economia de tokens
+1. ponytail — Solução mínima correta, YAGNI e menor diff seguro
 2. lyvox-core-reader — Leitura obrigatória do vault
 3. audit-context-building — Contexto antes de atuar
 4. deep-research — Pesquisa profunda

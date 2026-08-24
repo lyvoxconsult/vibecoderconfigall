@@ -72,7 +72,7 @@ Após a consolidação do Lyvox Core como vault canônico, o pack obrigatório d
 
 | # | Skill | Função Principal | Status |
 |---|---|---|---|
-| 1 | caveman | Clareza e economia de tokens | ✅ Obrigatória |
+| 1 | ponytail | Solução mínima correta, YAGNI e menor diff seguro | ✅ Obrigatória |
 | 2 | lyvox-core-reader | Leitura obrigatória do vault | ✅ Obrigatória |
 | 3 | audit-context-building | Contexto antes de atuar | ✅ Obrigatória |
 | 4 | deep-research | Pesquisa profunda | ✅ Obrigatória |
@@ -85,7 +85,7 @@ Após a consolidação do Lyvox Core como vault canônico, o pack obrigatório d
 
 ### 4.1 Regra de Uso
 
-Todo agente e IDE deve carregar as 10 skills obrigatórias antes de executar qualquer tarefa no ecossistema Lyvox. A referência canônica é sempre o vault `D:\Lyvox Core\Lyvox Core`.
+Todo agente e IDE deve carregar as 10 skills obrigatórias antes de executar qualquer tarefa no ecossistema Lyvox. A referência canônica é sempre o vault `<OBSIDIAN_VAULT>`.
 
 ---
 
@@ -96,7 +96,7 @@ Todo agente e IDE deve carregar as 10 skills obrigatórias antes de executar qua
 | Skills registradas | 10 |
 | Skills locais | 28 |
 | Skills em packs | ~2480 |
-| Skills obrigatórias | 10 |
+| Skills obrigatórias | 10 + condicionais por domínio |
 | Vault canônico | Lyvox Core |
 
 ---
